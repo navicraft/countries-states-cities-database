@@ -116,6 +116,10 @@ jobs:
           mysql2sqlite -d world -t countries --mysql-password root -u root -f sqlite/countries.sqlite3
           mysql2sqlite -d world -t states --mysql-password root -u root -f sqlite/states.sqlite3
           mysql2sqlite -d world -t cities --mysql-password root -u root -f sqlite/cities.sqlite3
+          mysql2sqlite -d world -t countries states --mysql-password root -u root -f sqlite/countries+states.sqlite3
+          mysql2sqlite -d world -t countries cities --mysql-password root -u root -f sqlite/countries+cities.sqlite3
+          mysql2sqlite -d world -t states cities --mysql-password root -u root -f sqlite/states+cities.sqlite3
+          mysql2sqlite -d world --mysql-password root -u root -f sqlite/world.sqlite3
 
       - name: Update README.md
         run: |
@@ -130,7 +134,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: Add exported JSON, CSV, XML & YAML & PSQL & SQLITE files
-          committer: Navi <navified@gmail.com>
+          committer: Test <navified@gmail.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: true
           branch: export/Files
